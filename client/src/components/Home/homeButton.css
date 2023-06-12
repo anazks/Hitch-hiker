@@ -1,0 +1,17 @@
+.centerspace{  
+    width: 100%;
+    height: 70vh;
+}
+.centerDiv{
+    margin: auto;
+    display: block;
+    width: 32rem;
+    height: 17rem;
+    padding-top: 8rem;
+
+}
+.LbuttonText{
+    font-family: 'IM Fell English', serif;
+    font-family: 'Inika', serif;
+    font-family: 'Rubik', sans-serif;
+}

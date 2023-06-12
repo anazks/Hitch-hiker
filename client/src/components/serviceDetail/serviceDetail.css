@@ -1,0 +1,25 @@
+.featureditems{
+   padding: 2rem 6rem;
+}
+.topFeature{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;  
+    padding: 2rem;
+    border-radius: 10px;
+    background-color: rgb(244, 240, 240);
+}
+.h{
+    flex: 2;
+    text-transform: capitalize; 
+    font-family: 'IM Fell English', serif;
+    font-family: 'Inika', serif;
+    font-family: 'Rubik', sans-serif;
+}
+.p{
+    flex: 3;
+    margin: 4px;
+    color: gray;
+    text-align: justify;
+    padding-right: 6rem;
+}

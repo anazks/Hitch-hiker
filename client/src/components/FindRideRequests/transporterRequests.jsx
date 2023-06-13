@@ -1,13 +1,15 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState,useCallback} from 'react';
 import img from '../../img/start.png'
 import imgg from '../../img/greenst.png'
 import dot from '../../img/arrow.png'
 import Axios from '../../axios/configaxios'
+import useRazorpay from "react-razorpay";
 
 
 function TransporterRequests({obj}) {
-
+    const Razorpay = useRazorpay();
+    const[order,setOrder] = useState('')
    const [reqButton,setReqbutton] = useState(false)
    const [pickupInput,setpickupInput]=useState(false)
    const [pickPoVal,setpickPoVal] =useState({pickPointValue:'',destinatnPoint:''})
@@ -29,6 +31,46 @@ const settrue=()=>{
         }
     }
 
+    const handlePayment = useCallback(async (id,amount) => {
+        console.log(id,amount,"id-----------")
+        let data = {
+            id,
+            amount
+        }
+
+         await Axios.post('/createOrder',{data}).then((response)=>{
+            console.log(response.data)
+            setOrder(response.data)
+        })
+    
+        const options = {
+          key: "rzp_test_W8RGjInsDaKQiY",
+          amount: "3000",
+          currency: "INR",
+          name: "Acme Corp",
+          description: "Test Transaction",
+          image: "https://example.com/your_logo",
+          order_id:order.id,
+          handler: (res) => {
+            console.log(res);
+          },
+          prefill: {
+            name: "Piyush Garg",
+            email: "youremail@example.com",
+            contact: "9999999999",
+          },
+          notes: {
+            address: "Razorpay Corporate Office",
+          },
+          theme: {
+            color: "#3399cc",
+          },
+        };
+    
+        const rzpay = new Razorpay(options);
+        rzpay.open();
+      }, [Razorpay]);
+    
 
     return ( 
         <div className="TrideReqdiv d-flex justify-content-center m-2">
@@ -61,7 +103,12 @@ const settrue=()=>{
                 <div className="divButton  d-flex justify-content-start">
                     {
                         reqButton === false ? <button className="btn  my-auto"  type="button" style={{height:'3rem',width:'6rem',backgroundColor:'white',color:'black'}} onClick={settrue} ><b>Request</b></button>:
-                        <button className="btn mx-4 my-auto"  type="button" style={{height:'3rem',width:'6rem',backgroundColor:'white',color:'black'}}  disabled ><b>SENT</b></button>
+                            <>
+                                <button className="btn mx-4 my-auto"  type="button" style={{height:'3rem',width:'6rem',backgroundColor:'white',color:'black'}}  disabled ><b>SENT</b></button>
+                                <button className="btn mx-4 my-auto"  type="button" style={{height:'3rem',width:'6rem',backgroundColor:'white',color:'black'}}  onClick={handlePayment(obj._id,obj.amount)}><b>PAY</b></button>
+
+                            </>
+
                     }
                        
                         {

@@ -9,7 +9,7 @@ import Select from '@mui/material/Select';
 
 
 function TransporterForm({id}) {
-    const [routeDetail,setRoutedetail] = useState({name:'',contact:'',vehicle:'',vehino:'',route:'',routEnd:'',hint:'',date:'',time:'',id1:id})
+    const [routeDetail,setRoutedetail] = useState({name:'',contact:'',vehicle:'',vehino:'',route:'',routEnd:'',hint:'',amount:'',date:'',time:'',id1:id})
     async function Tsubmit(event) {
         try {
             
@@ -92,6 +92,13 @@ function TransporterForm({id}) {
               <div className="form-floating m-2">
               <input type="text" className="form-control" name='password' placeholder='Password' id='identity' value={routeDetail.hint} onChange={e => setRoutedetail({...routeDetail,hint:e.target.value})}  required />
                   <label for="identity">Eg: A Black Ford mustang. </label>
+              </div>
+              </div>
+              <div className="dentificationHint">
+                <p className="fw-normal m-0 ms-1"><b>Payment</b></p>
+              <div className="form-floating m-2">
+              <input type="text" className="form-control" name='amount' placeholder='amount' id='amount' value={routeDetail.amount} onChange={e => setRoutedetail({...routeDetail,amount:e.target.value})}  required />
+                 
               </div>
               </div>
             <div className="submitPass d-flex justify-content-start p-2" >

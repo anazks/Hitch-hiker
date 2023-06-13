@@ -56,6 +56,14 @@ const transporterrideRequest = new mongoose.Schema({
     status:{
         type:String,
         default:"Available"
+    },
+    payment:{
+        type:String,
+        default:"Not available"
+    },
+    amount:{
+        type:String,
+        default:10
     }
 },{timestamps: true})
 

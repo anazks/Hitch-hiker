@@ -104,6 +104,7 @@ function TransporterMyrequest({ob}) {
                         </div>
                         </div>
                        <p><b>Passenger connect you by using the contact  provided.</b></p>
+                       <p><b>Payment: Not Yet</b></p>
                     </div>
                     
                     </div>

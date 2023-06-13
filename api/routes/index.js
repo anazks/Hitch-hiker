@@ -4,7 +4,7 @@ var passengerRequest = require('../Models/passengerideModel')
 var transpoeterRequest = require('../Models/transporterForm')
 let nodemailer = require('nodemailer');
 var router = express.Router();
-
+var Razorpay = require('../Razorpay/Razorpay')
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
@@ -238,5 +238,19 @@ router.get('/allPassengers',async(req,res)=>{
   }else[
     res.json({responce:null})
   ]    
+})
+router.post('/createOrder',async(req,res)=>{
+    console.log(req.body.data)
+    var amount = req.body.amount;
+    var options = {
+      amount: amount*100,  // amount in the smallest currency unit
+      currency: "INR",
+      receipt: "order_rcptid_11"
+    };
+     Razorpay.orders.create(options, function(err, order) {
+      console.log(order);
+      // res.render('user/chechOut',{user,order})
+      res.json(order)
+    });
 })
 module.exports = router;
